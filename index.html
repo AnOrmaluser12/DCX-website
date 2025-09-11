@@ -39,19 +39,29 @@
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
       transition: transform 0.2s ease;
-      height: 280px; /* Slightly reduced for mobile */
+      height: 280px;
+      position: relative;
+      overflow: hidden;
     }
     .card:hover {
       transform: translateY(-5px);
     }
-    .card img {
-      width: 180px;
-      height: 180px;
-      object-fit: contain;
-      margin-top: 10px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: inherit; /* Inherits the img src */
+      background-size: cover;
+      background-position: center;
+      filter: blur(5px); /* Blurry effect */
+      z-index: 0;
+    }
+    .card-content {
+      position: relative;
+      z-index: 1;
     }
     .card h2 {
       margin: 8px 0 5px;
@@ -71,6 +81,7 @@
       text-decoration: none;
       transition: background 0.2s ease;
       font-size: 0.85rem;
+      z-index: 1;
     }
     .btn:hover {
       background: #46c5a3;
@@ -90,7 +101,6 @@
       background: #162123;
     }
 
-    /* Media query for mobile devices */
     @media (max-width: 600px) {
       header {
         padding: 15px 10px;
@@ -104,12 +114,8 @@
         padding: 10px;
       }
       .card {
-        height: auto; /* Allow dynamic height */
+        height: auto;
         padding: 8px;
-      }
-      .card img {
-        width: 140px;
-        height: 140px;
       }
       .card h2 {
         font-size: 1rem;
@@ -139,17 +145,19 @@
   </header>
 
   <main class="projects">
-    <div class="card">
-      <h2>vmtouch_android</h2>
-      <p>Preload Your Game/App Or System Libraries Into RAM.</p>
-      <a href="https://t.me/dcx4020/32" class="btn">Download</a>
-      <img src="https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg" alt="vmtouch_android">
+    <div class="card" style="background-image: url('https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg');">
+      <div class="card-content">
+        <h2>vmtouch_android</h2>
+        <p>Preload Your Game/App Or System Libraries Into RAM.</p>
+        <a href="https://t.me/dcx4020/32" class="btn">Download</a>
+      </div>
     </div>
-    <div class="card">
-      <h2>Game</h2>
-      <p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p>
-      <a href="https://t.me/dcx4020/42" class="btn">Download</a>
-      <img src="https://lh3.googleusercontent.com/-rYnmAp5PL-s/ZDj0DH5MqKI/AAAAAAABSl4/sPWiEvb0gakk1K0SyY4iqJhAyHTDX4sFwCNcBGAsYHQ/s0/Errol.jpg" alt="Game Script">
+    <div class="card" style="background-image: url('https://lh3.googleusercontent.com/-rYnmAp5PL-s/ZDj0DH5MqKI/AAAAAAABSl4/sPWiEvb0gakk1K0SyY4iqJhAyHTDX4sFwCNcBGAsYHQ/s0/Errol.jpg');">
+      <div class="card-content">
+        <h2>Game</h2>
+        <p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p>
+        <a href="https://t.me/dcx4020/42" class="btn">Download</a>
+      </div>
     </div>
   </main>
 
