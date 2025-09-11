@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dcx402</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dcx402</title>
+<style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -55,10 +56,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: inherit;
+      background-image: inherit; /* Inherits the img src */
       background-size: cover;
       background-position: center;
-      filter: blur(5px);
+      filter: blur(5px); /* Blurry effect */
       z-index: 0;
     }
     .card-content {
@@ -67,7 +68,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-between; /* pushes button to bottom */
     }
     .card h2 {
       margin: 8px 0 5px;
@@ -107,6 +108,7 @@
       background: #162123;
     }
 
+    /* Media query for mobile devices */
     @media (max-width: 600px) {
       header {
         padding: 15px 10px;
@@ -143,6 +145,8 @@
         font-size: 1rem;
       }
     }
+
+    /* === Card Fade-in Animation === */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -161,35 +165,33 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>@Dcx400/2123 | Your Phone Is My Phone</h1>
-  </header>
-
-  <main class="projects">
-    <div class="card" style="background-image: url('https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg');">
-      <div class="card-content">
-        <h2>vmtouch_android</h2>
-        <p>Preload Your Game/App Or System Libraries Into RAM.</p>
-        <a href="https://t.me/dcx4020/32" class="btn">Download</a>
-      </div>
-    </div>
-    <div class="card" style="background-image: url('https://lh3.googleusercontent.com/-rYnmAp5PL-s/ZDj0DH5MqKI/AAAAAAABSl4/sPWiEvb0gakk1K0SyY4iqJhAyHTDX4sFwCNcBGAsYHQ/s0/Errol.jpg');">
-      <div class="card-content">
-        <h2>Game</h2>
-        <p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p>
-        <a href="https://t.me/dcx4020/42" class="btn">Download</a>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <div class="intro">
-      <p>A sleepy guy who love messing around with android</p>
-      <p>Feel Free To Join My Telegram Channel</p>
-    </div>
-    <h2>Contact</h2>
-    <a href="https://t.me/Dcx400" class="btn">My Telegram</a>
-    <a href="https://t.me/dcx4020" class="btn">Telegram Channel</a>
-  </footer>
+<header>
+<h1>@Dcx400/2123 | Your Phone Is My Phone</h1>
+</header>
+<main class="projects">
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg');">
+<div class="card-content">
+<h2>vmtouch_android</h2>
+<p>Preload Your Game/App Or System Libraries Into RAM.</p>
+<a class="btn" href="https://t.me/dcx4020/32">Download</a>
+</div>
+</div>
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-HjHuvbkMaxg/YwrtY5GsPBI/AAAAAAABAwg/C-VHhTFOmB0_CHRnFZXeKc4hUFFbvzx2QCNcBGAsYHQ/s0/Hayate.jpg');">
+<div class="card-content">
+<h2>Game</h2>
+<p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p>
+<a class="btn" href="https://t.me/dcx4020/54">Download</a>
+</div>
+</div>
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-tQvQS0VDa-Y/aMKFMrmTrMI/AAAAAAADqvc/uWyt4K3exdg92Ny5ASsjxl3UhGr7-SEfgCK4BGAsYHg/s0/Astrid.jpg');"><div class="card-content"><h2>SurfaceFlinger</h2><p>Auto-Tuning Based On Your Screen Refresh Rate</p><a class="btn" href="https://github.com/AnOrmaluser12/SurfaceFlinger">View Project</a></div></div></main>
+<footer>
+<div class="intro">
+<p>A sleepy guy who love messing around with android</p>
+<p>Feel Free To Join My Telegram Channel</p>
+</div>
+<h2>Contact</h2>
+<a class="btn" href="https://t.me/Dcx400">My Telegram</a>
+<a class="btn" href="https://t.me/dcx4020">Telegram Channel</a>
+</footer>
 </body>
 </html>
