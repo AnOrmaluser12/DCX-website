@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Android Tweaks by DCX</title>
+  <title>Dcx402</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -25,7 +25,7 @@
     }
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
       padding: 20px;
       max-width: 900px;
@@ -35,7 +35,7 @@
     .card {
       background: #27393f;
       border-radius: 16px;
-      padding: 20px;
+      padding: 15px;
       text-align: center;
       box-shadow: 0 0 12px rgba(0,0,0,0.3);
       transition: transform 0.2s ease;
@@ -43,19 +43,30 @@
     .card:hover {
       transform: translateY(-5px);
     }
+    .card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
     .card h2 {
-      margin-top: 0;
+      margin: 10px 0 5px;
       color: #72f1b8;
+      font-size: 1.2rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
     }
     .btn {
       display: inline-block;
-      margin-top: 12px;
-      padding: 10px 20px;
+      padding: 8px 16px;
       background: #2e9d85;
       color: white;
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.2s ease;
+      font-size: 0.9rem;
     }
     .btn:hover {
       background: #46c5a3;
@@ -78,11 +89,13 @@
 
   <main class="projects">
     <div class="card">
+      <img src="https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg" alt="vmtouch_android">
       <h2>vmtouch_android</h2>
       <p>Preload Your Game/App Or System Libraries Into RAM.</p>
       <a href="https://t.me/dcx4020/32" class="btn">Download</a>
     </div>
     <div class="card">
+      <img src="https://lh3.googleusercontent.com/-rYnmAp5PL-s/ZDj0DH5MqKI/AAAAAAABSl4/sPWiEvb0gakk1K0SyY4iqJhAyHTDX4sFwCNcBGAsYHQ/s0/Errol.jpg" alt="Game Script">
       <h2>Game</h2>
       <p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p>
       <a href="https://t.me/dcx4020/42" class="btn">Download</a>
