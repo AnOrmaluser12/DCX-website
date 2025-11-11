@@ -1,189 +1,55 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Dcx402</title>
 <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #1e2a2f;
-      color: #e6f1f1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      text-align: center;
-      padding: 20px 15px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: #a8ffdc;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      padding: 15px;
-      max-width: 900px;
-      margin: auto;
-      flex: 1;
-    }
-    .card {
-      background: #27393f;
-      border-radius: 12px;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease;
-      height: 280px;
-      position: relative;
-      overflow: hidden;
-      opacity: 0; /* start hidden */
-      animation: fadeInUp 0.8s ease forwards;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: inherit; /* Inherits the img src */
-      background-size: cover;
-      background-position: center;
-      filter: blur(5px); /* Blurry effect */
-      z-index: 0;
-    }
-    .card-content {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; /* pushes button to bottom */
-    }
-    .card h2 {
-      margin: 8px 0 5px;
-      color: #72f1b8;
-      font-size: 1.1rem;
-    }
-    .card p {
-      font-size: 0.85rem;
-      margin-bottom: 8px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 6px 12px;
-      background: #2e9d85;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.2s ease;
-      font-size: 0.85rem;
-      z-index: 1;
-    }
-    .btn:hover {
-      background: #46c5a3;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #162123;
-    }
-    footer h2 {
-      margin-bottom: 10px;
-      color: #72f1b8;
-    }
-    .intro {
-      text-align: center;
-      padding: 15px;
-      background: #162123;
-    }
-
-    /* Media query for mobile devices */
-    @media (max-width: 600px) {
-      header {
-        padding: 15px 10px;
-      }
-      header h1 {
-        font-size: 1.2rem;
-      }
-      .projects {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 10px;
-      }
-      .card {
-        height: auto;
-        padding: 8px;
-      }
-      .card h2 {
-        font-size: 1rem;
-      }
-      .card p {
-        font-size: 0.8rem;
-      }
-      .btn {
-        padding: 5px 10px;
-        font-size: 0.8rem;
-      }
-      .intro {
-        padding: 10px;
-      }
-      footer {
-        padding: 10px;
-      }
-      footer h2 {
-        font-size: 1rem;
-      }
-    }
-
-    /* === Card Fade-in Animation === */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .card:nth-child(1) { animation-delay: 0.2s; }
-    .card:nth-child(2) { animation-delay: 0.4s; }
-    .card:nth-child(3) { animation-delay: 0.6s; }
-
-  </style>
+    body {font-family: Arial, sans-serif;margin: 0;background: #1e2a2f;color: #e6f1f1;display: flex;flex-direction: column;min-height: 100vh;}
+    header {text-align: center;padding: 20px 15px;}
+    header h1 {margin: 0;font-size: 1.5rem;color: #a8ffdc;}
+    .projects {display: grid;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));gap: 15px;padding: 15px;max-width: 900px;margin: auto;flex: 1;}
+    .card {background: #27393f;border-radius: 12px;padding: 10px;text-align: center;box-shadow: 0 0 10px rgba(0,0,0,0.3);transition: transform 0.2s ease;height: 280px;position: relative;overflow: hidden;opacity: 0;animation: fadeInUp 0.8s ease forwards;}
+    .card:hover {transform: translateY(-5px);}
+    .card::before {content: "";position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image: inherit;background-size: cover;background-position: center;filter: blur(5px);z-index: 0;}
+    .card-content {position: relative;z-index: 1;height: 100%;display: flex;flex-direction: column;justify-content: space-between;}
+    .card h2 {margin: 8px 0 5px;color: #72f1b8;font-size: 1.1rem;}
+    .card p {font-size: 0.85rem;margin-bottom: 8px;}
+    .btn {display: inline-block;padding: 6px 12px;background: #2e9d85;color: white;border-radius: 6px;text-decoration: none;transition: background 0.2s ease;font-size: 0.85rem;z-index: 1;}
+    .btn:hover {background: #46c5a3;}
+    footer {text-align: center;padding: 15px;background: #162123;}
+    footer h2 {margin-bottom: 10px;color: #72f1b8;}
+    .intro {text-align: center;padding: 15px;background: #162123;}
+    @keyframes fadeInUp {from {opacity: 0;transform: translateY(20px);}to {opacity: 1;transform: translateY(0);}}
+</style>
 </head>
 <body>
 <header>
 <h1>@Dcx400/2123 | Your Phone Is My Phone</h1>
 </header>
 <main class="projects">
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg');">
-<div class="card-content">
-<h2>vmtouch_android</h2>
-<p>Preload Your Game/App Or System Libraries Into RAM.</p>
-<a class="btn" href="https://t.me/dcx4020/32">Download</a>
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg');"><div class="card-content"><h2>vmtouch_android</h2><p>Preload Your Game/App Or System Libraries Into RAM.</p><a class="btn" href="https://t.me/dcx4020/32">Download</a></div></div>
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-oAy-EUo775c/YvRoDwBtN9I/AAAAAAABAF4/0noPBxdKZmInccBx-XRzzYO-VvjeKgHwACNcBGAsYHQ/s0/Paine.jpg');"><div class="card-content"><h2>Game</h2><p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p><a class="btn" href="https://t.me/archiverdcx/5">Download</a></div></div>
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-tQvQS0VDa-Y/aMKFMrmTrMI/AAAAAAADqvc/uWyt4K3exdg92Ny5ASsjxl3UhGr7-SEfgCK4BGAsYHg/s0/Astrid.jpg');"><div class="card-content"><h2>SurfaceFlinger</h2><p>Auto-Tuning Based On Your Screen Refresh Rate</p><a class="btn" href="https://github.com/AnOrmaluser12/SurfaceFlinger">View Project</a></div></div>
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-UvLvRMJ3Sds/YvNiJbHVYWI/AAAAAAABAA0/16yDNBTM1csymlXRSqkM-pHV1g4VJMb_wCNcBGAsYHQ/s0/Murad.jpg');"><div class="card-content"><h2>Dexopt</h2><p>A dynamic script to optimize and compile your system and user apps in the background.</p><a class="btn" href="https://github.com/AnOrmaluser12/Dexpile">View Project</a></div></div>
+
+<div class="card" style="background-image: url('https://cdnb.artstation.com/p/assets/images/images/037/405/485/large/armando-sionosa-black-zero-and-muramasa.jpg?1620291887');">
+  <div class="card-content">
+    <h2>Abandon-Engine</h2>
+    <p>A simple file designed for Transsion devices.</p>
+    <a class="btn" href="https://t.me/dcx4020/63">Download</a>
+  </div>
 </div>
+
+<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-h9BtG4r-6Ws/Z3dauaf5WSI/AAAAAAADCWU/EHJjV1Tq8fAX5meNGOoAOgxCqhtylM7YwCK4BGAsYHg/s0/Tachi.jpg');">
+  <div class="card-content">
+    <h2>Klixr</h2>
+    <p>A Simple File Designed For Daily Use.</p>
+    <a class="btn" href="https://t.me/dcx4020/65">Download</a>
+  </div>
 </div>
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-HjHuvbkMaxg/YwrtY5GsPBI/AAAAAAABAwg/C-VHhTFOmB0_CHRnFZXeKc4hUFFbvzx2QCNcBGAsYHQ/s0/Hayate.jpg');">
-<div class="card-content">
-<h2>Game</h2>
-<p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p>
-<a class="btn" href="https://t.me/dcx4020/54">Download</a>
-</div>
-</div>
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-tQvQS0VDa-Y/aMKFMrmTrMI/AAAAAAADqvc/uWyt4K3exdg92Ny5ASsjxl3UhGr7-SEfgCK4BGAsYHg/s0/Astrid.jpg');"><div class="card-content"><h2>SurfaceFlinger</h2><p>Auto-Tuning Based On Your Screen Refresh Rate</p><a class="btn" href="https://github.com/AnOrmaluser12/SurfaceFlinger">View Project</a></div></div><div class="card" style="background-image: url('https://lh3.googleusercontent.com/-UvLvRMJ3Sds/YvNiJbHVYWI/AAAAAAABAA0/16yDNBTM1csymlXRSqkM-pHV1g4VJMb_wCNcBGAsYHQ/s0/Murad.jpg');"><div class="card-content"><h2>Dexopt</h2><p>A dynamic script to optimize and compile your system and user apps in the background.</p><a class="btn" href="https://github.com/AnOrmaluser12/Dexpile">View Project</a></div></div></main>
+
+</main>
 <footer>
 <div class="intro">
 <p>A sleepy guy who love messing around with android</p>
