@@ -3,61 +3,579 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dcx402</title>
+<title>Dcx400 — Android Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-    body {font-family: Arial, sans-serif;margin: 0;background: #1e2a2f;color: #e6f1f1;display: flex;flex-direction: column;min-height: 100vh;}
-    header {text-align: center;padding: 20px 15px;}
-    header h1 {margin: 0;font-size: 1.5rem;color: #a8ffdc;}
-    .projects {display: grid;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));gap: 15px;padding: 15px;max-width: 900px;margin: auto;flex: 1;}
-    .card {background: #27393f;border-radius: 12px;padding: 10px;text-align: center;box-shadow: 0 0 10px rgba(0,0,0,0.3);transition: transform 0.2s ease;height: 280px;position: relative;overflow: hidden;opacity: 0;animation: fadeInUp 0.8s ease forwards;}
-    .card:hover {transform: translateY(-5px);}
-    .card::before {content: "";position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-image: inherit;background-size: cover;background-position: center;filter: blur(5px);z-index: 0;}
-    .card-content {position: relative;z-index: 1;height: 100%;display: flex;flex-direction: column;justify-content: space-between;}
-    .card h2 {margin: 8px 0 5px;color: #72f1b8;font-size: 1.1rem;}
-    .card p {font-size: 0.85rem;margin-bottom: 8px;}
-    .btn {display: inline-block;padding: 6px 12px;background: #2e9d85;color: white;border-radius: 6px;text-decoration: none;transition: background 0.2s ease;font-size: 0.85rem;z-index: 1;}
-    .btn:hover {background: #46c5a3;}
-    footer {text-align: center;padding: 15px;background: #162123;}
-    footer h2 {margin-bottom: 10px;color: #72f1b8;}
-    .intro {text-align: center;padding: 15px;background: #162123;}
-    @keyframes fadeInUp {from {opacity: 0;transform: translateY(20px);}to {opacity: 1;transform: translateY(0);}}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2329;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(168,255,220,0.25);
+    --accent: #a8ffdc;
+    --accent2: #72f1b8;
+    --accent-dim: rgba(168,255,220,0.08);
+    --text: #e6f1f1;
+    --muted: #7d9090;
+    --tag-bg: rgba(114,241,184,0.1);
+    --tag-color: #72f1b8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(168,255,220,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,255,220,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: clamp(60px, 12vh, 120px) clamp(16px, 5vw, 60px) clamp(40px, 8vh, 80px);
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+    background: var(--tag-bg);
+    border: 1px solid rgba(114,241,184,0.2);
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: var(--accent);
+    color: #0d1117;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--accent2); transform: translateY(-1px); }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    padding-left: 2px;
+  }
+
+  .projects-section {
+    position: relative;
+    z-index: 1;
+    padding: 0 clamp(16px, 5vw, 60px) clamp(60px, 10vh, 100px);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    opacity: 0;
+    animation: rise 0.6s ease forwards;
+  }
+
+  .card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.18s; }
+  .card:nth-child(4) { animation-delay: 0.24s; }
+  .card:nth-child(5) { animation-delay: 0.30s; }
+  .card:nth-child(6) { animation-delay: 0.36s; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-thumb {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.65) saturate(0.8);
+    transition: filter 0.3s;
+  }
+
+  .card:hover .card-thumb {
+    filter: brightness(0.8) saturate(1);
+  }
+
+  .card-thumb-placeholder {
+    width: 100%;
+    height: 160px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-body {
+    padding: 18px 20px 20px;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--tag-color);
+    background: var(--tag-bg);
+    border: 1px solid rgba(114,241,184,0.15);
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent2);
+    text-decoration: none;
+    border: 1px solid rgba(114,241,184,0.2);
+    padding: 6px 14px;
+    border-radius: 7px;
+    background: var(--tag-bg);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .card-link:hover {
+    background: rgba(114,241,184,0.15);
+    border-color: rgba(114,241,184,0.4);
+  }
+
+  .card-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: var(--border);
+    margin: 0 clamp(16px, 5vw, 60px);
+  }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: clamp(40px, 8vh, 80px) clamp(16px, 5vw, 60px);
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+  }
+
+  .footer-left p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 340px;
+  }
+
+  .footer-left p + p { margin-top: 6px; }
+
+  .footer-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: var(--accent); }
+
+  .footer-link svg { opacity: 0.5; }
+
+  .footer-bottom {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 16px clamp(16px, 5vw, 60px) 32px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    opacity: 0.6;
+    border-top: 1px solid var(--border);
+  }
+
+  .stats-strip {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: clamp(24px, 6vw, 80px);
+    padding: 32px clamp(16px, 5vw, 60px);
+    margin-bottom: 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--accent);
+    display: block;
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 600px) {
+    footer {
+      grid-template-columns: 1fr;
+    }
+    .footer-links {
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; opacity: 1; }
+  }
 </style>
 </head>
 <body>
-<header>
-<h1>@Dcx400/2123 | Your Phone Is My Phone</h1>
-</header>
-<main class="projects">
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-9fe-gfSo0Q4/Yveu8Er7fpI/AAAAAAABAOY/ncpjnFG-XoUuoBQDndQ07P_aNRutXAHEwCNcBGAsYHQ/s0/Omen.jpg');"><div class="card-content"><h2>vmtouch_android</h2><p>Preload Your Game/App Or System Libraries Into RAM.</p><a class="btn" href="https://t.me/dcx4020/32">Download</a></div></div>
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-oAy-EUo775c/YvRoDwBtN9I/AAAAAAABAF4/0noPBxdKZmInccBx-XRzzYO-VvjeKgHwACNcBGAsYHQ/s0/Paine.jpg');"><div class="card-content"><h2>Game</h2><p>A Simple Shell Script Will Automatically Change Your Game From Default Driver To Game Driver.</p><a class="btn" href="https://t.me/archiverdcx/5">Download</a></div></div>
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-tQvQS0VDa-Y/aMKFMrmTrMI/AAAAAAADqvc/uWyt4K3exdg92Ny5ASsjxl3UhGr7-SEfgCK4BGAsYHg/s0/Astrid.jpg');"><div class="card-content"><h2>SurfaceFlinger</h2><p>Auto-Tuning Based On Your Screen Refresh Rate</p><a class="btn" href="https://github.com/AnOrmaluser12/SurfaceFlinger">View Project</a></div></div>
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-UvLvRMJ3Sds/YvNiJbHVYWI/AAAAAAABAA0/16yDNBTM1csymlXRSqkM-pHV1g4VJMb_wCNcBGAsYHQ/s0/Murad.jpg');"><div class="card-content"><h2>Dexopt</h2><p>A dynamic script to optimize and compile your system and user apps in the background.</p><a class="btn" href="https://github.com/AnOrmaluser12/Dexpile">View Project</a></div></div>
 
-<div class="card" style="background-image: url('https://cdnb.artstation.com/p/assets/images/images/037/405/485/large/armando-sionosa-black-zero-and-muramasa.jpg?1620291887');">
-  <div class="card-content">
-    <h2>Abandon-Engine</h2>
-    <p>A simple file designed for Transsion devices.</p>
-    <a class="btn" href="https://t.me/dcx4020/63">Download</a>
+<section class="hero">
+  <div class="hero-eyebrow">Your Phone Is My Phone</div>
+  <h1>Android<br><span>Stuff & Tools</span></h1>
+  <p class="hero-sub">Open-source modules built to automate things. Crafted by a sleepy dev who loves messing around.</p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="https://t.me/dcx4020" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      Telegram Channel
+    </a>
+    <a class="btn-ghost" href="#projects">
+      View Projects ↓
+    </a>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat">
+    <span class="stat-num">8</span>
+    <div class="stat-label">Projects</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">Open</span>
+    <div class="stat-label">Source</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">Free</span>
+    <div class="stat-label">Always</div>
   </div>
 </div>
 
-<div class="card" style="background-image: url('https://lh3.googleusercontent.com/-h9BtG4r-6Ws/Z3dauaf5WSI/AAAAAAADCWU/EHJjV1Tq8fAX5meNGOoAOgxCqhtylM7YwCK4BGAsYHg/s0/Tachi.jpg');">
-  <div class="card-content">
-    <h2>Klixr</h2>
-    <p>A Simple File Designed For Daily Use.</p>
-    <a class="btn" href="https://t.me/dcx4020/65">Download</a>
-  </div>
-</div>
+<section class="projects-section" id="projects">
+  <p class="section-label">// Projects</p>
+  <div class="projects-grid">
 
-</main>
-<footer>
-<div class="intro">
-<p>A sleepy guy who love messing around with android</p>
-<p>Feel Free To Join My Telegram Channel</p>
-</div>
-<h2>Contact</h2>
-<a class="btn" href="https://t.me/Dcx400">My Telegram</a>
-<a class="btn" href="https://t.me/dcx4020">Telegram Channel</a>
+    <div class="card">
+      <img class="card-thumb" src="https://lh3.googleusercontent.com/-UvLvRMJ3Sds/YvNiJbHVYWI/AAAAAAABAA0/16yDNBTM1csymlXRSqkM-pHV1g4VJMb_wCNcBGAsYHQ/s0/Murad.jpg" alt="Dexopt" loading="lazy" onerror="this.style.display='none'"/>
+      <div class="card-body">
+        <div class="card-tag">Compiler · Shell Script</div>
+        <h2>Dexopt</h2>
+        <p>Dynamic script to optimize and compile system and user apps in the background without interrupting usage.</p>
+        <div class="card-footer">
+          <a class="card-link" href="https://github.com/AnOrmaluser12/Dexpile" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-thumb" src="https://lh3.googleusercontent.com/-oAy-EUo775c/YvRoDwBtN9I/AAAAAAABAF4/0noPBxdKZmInccBx-XRzzYO-VvjeKgHwACNcBGAsYHQ/s0/Paine.jpg" alt="Game" loading="lazy" onerror="this.style.display='none'"/>
+      <div class="card-body">
+        <div class="card-tag">Game · Module</div>
+        <h2>Game</h2>
+        <p>Shell script that automatically switches your game from the default GPU driver to the game driver for better performance.</p>
+        <div class="card-footer">
+          <a class="card-link" href="https://t.me/archiverdcx/5" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-thumb" src="https://static.wikia.nocookie.net/annoying-villagers/images/b/b6/Drowned_Legendary_Sword.PNG/revision/latest?cb=20200607072957" alt="Abandon-Engine" loading="lazy" onerror="this.style.display='none'"/>
+      <div class="card-body">
+        <div class="card-tag">Daily · Module</div>
+        <h2>Abandon-Engine</h2>
+        <p>A targeted file designed specifically for Transsion devices to improve stability and performance.</p>
+        <div class="card-footer">
+          <a class="card-link" href="https://t.me/archiverdcx/150" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-thumb" src="https://lh3.googleusercontent.com/-Ht3eYxJ3wck/Y0KjSYvjP2I/AAAAAAABDmI/xcoIzuBXv1Ef4oh6oqgS7Fl6cJH69uf-wCNcBGAsYHQ/s0/Zephys-x-Hayate.jpg" alt="Klixr" loading="lazy" onerror="this.style.display='none'"/>
+      <div class="card-body">
+        <div class="card-tag">Daily · Module</div>
+        <h2>Klixr</h2>
+        <p>A lightweight file built for daily use — practical tweaks that make everyday Android usage smoother.</p>
+        <div class="card-footer">
+          <a class="card-link" href="https://t.me/archiverdcx/120" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+	
+	<div class="card">
+	  <img class="card-thumb" src="https://lh3.googleusercontent.com/-wMZrzeDSfgM/Y0jLAOX8dwI/AAAAAAABDxY/xJntrLIjuKoxUYAdMghG8b1o2hTsyJPRwCNcBGAsYHQ/s0/Murad.jpg" alt="UtensilPoker" loading="lazy" onerror="this.style.display='none'"/>
+	  <div class="card-body">
+		<div class="card-tag">Battery · Module</div>
+		<h2>Utensil-Poker</h2>
+		<p>A must-have module for battery lovers: extend your battery life for hours with an easy-to-learn interface.</p>
+		<div class="card-footer">
+		  <a class="card-link" href="https://t.me/archiverdcx/127" target="_blank">
+			Download
+		  </a>
+		</div>
+	  </div>
+	</div>
+	
+	<div class="card">
+	  <img class="card-thumb" src="https://lh3.googleusercontent.com/-xjb87w2WhnA/Yu_EwCLGOTI/AAAAAAAA_uc/U8pN56DyAOkhahMQLrnKO_fAf7sW7b5NQCNcBGAsYHQ/s0/Eland'orr.jpg" alt="Aleep" loading="lazy" onerror="this.style.display='none'"/>
+	  <div class="card-body">
+		<div class="card-tag">Automation · Module</div>
+		<h2>Aleepy</h2>
+		<p>An automated plugin that enables airplane mode via a schedule timer, featuring a friendly interface.</p>
+		<div class="card-footer">
+		  <a class="card-link" href="https://t.me/archiverdcx/157" target="_blank">
+			Download
+		  </a>
+		</div>
+	  </div>
+	</div>
+
+	<div class="card">
+	  <img class="card-thumb" src="https://lh3.googleusercontent.com/-XSiYcPEEMug/aN41sNg-sMI/AAAAAAADwZ4/f-kyq8p85a8_Ns5T04u3gRbmy6Z-ragTACK4BGAsYHg/s0/Tachi.jpg" alt="oxil" loading="lazy" onerror="this.style.display='none'"/>
+	  <div class="card-body">
+		<div class="card-tag">Networking · Module</div>
+		<h2>Oxil</h2>
+		<p>A plugin that allows you to take control of networking on a per-app basis.</p>
+		<div class="card-footer">
+		  <a class="card-link" href="https://t.me/archiverdcx/97" target="_blank">
+			Download
+		  </a>
+		</div>
+	  </div>
+	</div>
+
+	<div class="card">
+	  <img class="card-thumb" src="https://lh3.googleusercontent.com/-APXX8DeVZbM/aVxw1rqtsBI/AAAAAAAEMJI/Qv1bTdrhxMc12-l5YT8KDkockgWly84SgCK4BGAsYHg/s0/Quillen.jpg" alt="winscale" loading="lazy" onerror="this.style.display='none'"/>
+	  <div class="card-body">
+		<div class="card-tag">Downscale · Module</div>
+		<h2>Winscale</h2>
+		<p>A plugin that allows you to downscale display resolution to improve battery life or increase performance.</p>
+		<div class="card-footer">
+		  <a class="card-link" href="https://t.me/archiverdcx/83" target="_blank">
+			Download
+		  </a>
+		</div>
+	  </div>
+	</div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer id="contact">
+  <div class="footer-left">
+    <p class="footer-title">// About</p>
+    <p>A sleepy guy who loves messing around with Android.</p>
+    <p>All projects are free and open for the community.</p>
+  </div>
+  <div class="footer-links">
+    <p class="footer-title" style="text-align:right;">// Contact</p>
+    <a class="footer-link" href="https://t.me/Dcx400" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      @Dcx400
+    </a>
+    <a class="footer-link" href="https://t.me/dcx4020" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Channel
+    </a>
+  </div>
 </footer>
+
+<div class="footer-bottom">
+  Dcx400 · Built things from scratch for the Android community
+</div>
+
 </body>
 </html>
